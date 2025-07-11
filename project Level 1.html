@@ -1,0 +1,102 @@
+<html>
+
+<head>
+    <style>
+        .main {
+            border: 2px solid black;
+            width: 500px;
+            padding: 10px;
+            margin: auto;
+        }
+
+        .add {
+            padding: 10px;
+            border: 2px solid red;
+        }
+
+        .add input[type="text"] {
+            width: 95%;
+            padding: 5px;
+            margin: 5px;
+        }
+
+        .add input[type="button"] {
+            padding: 10px;
+            width: 150px;
+
+        }
+    </style>
+
+    <script>
+        var expNames = [];
+        var expAmounts = [];
+        var expDates = [];
+        function addExpense() {
+            var txtName = document.getElementById("txtName");
+            var txtAmount = document.getElementById("txtAmount");
+            var txtDate = document.getElementById("txtDate");
+            if (txtName.value.length > 0 && txtAmount.value.length > 0 && txtDate.value.length > 0) {
+                expNames.push(txtName.value);
+                expAmounts.push(eval(txtAmount.value));
+                expDates.push(txtDate.value);
+                //alert("Data Added");
+                txtName.value = "";
+                txtAmount.value = "";
+                txtDate.value = "";
+
+                showData();
+            } else {
+                alert("Enter values in all textboxes");
+            }
+        }
+
+        function showData() {
+            var dvDisplay = document.getElementById("dvDisplay");
+            var dvTotalAmount = document.getElementById("dvTotalAmount");
+            var ct = "<h1>Expense Details</h1><hr/>";
+            var t = 0;
+            for (x = 0; x < expNames.length; x++) {
+                ct = ct + "Name :: " + expNames[x] + "<br/>";
+                ct = ct + "Amount :: " + expAmounts[x] + "<br/>";
+                ct = ct + "Date :: " + expDates[x] + "<hr/>";
+                t = t + expAmounts[x];
+            }
+
+            dvTotalAmount.innerHTML = "<h3>Total of All expenses = " + t + "</h3>";
+            dvDisplay.innerHTML = ct;
+        }
+
+    </script>
+</head>
+
+<body>
+    <div class="main">
+        <div class="result"></div>
+        <div class="add">
+            <h1>Add Expense Details</h1>
+            <hr>
+            Name <br />
+            <input type="text" id="txtName"><br />
+            Amount <br />
+            <input type="text" id="txtAmount"><br />
+            Date <br />
+            <input type="text" id="txtDate" placeholder="DD-MM-YYYY"><br />
+            <div style="text-align: center;">
+                <input type="button" value="Add" onclick="addExpense();">
+            </div>
+
+
+        </div>
+        <div id="dvTotalAmount">
+
+        </div>
+
+        <div class="display" id="dvDisplay">
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
